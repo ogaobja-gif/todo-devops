@@ -9,22 +9,44 @@ type Task = {
 
 export default function Home() {
   const [task, setTask] = useState("");
+
   const [tasks, setTasks] = useState<Task[]>([
     { text: "Finish assignment", completed: false },
     { text: "Study Next.js", completed: false },
     { text: "Setup Git repository", completed: true },
   ]);
 
+  // Add Task
   function addTask() {
     if (task.trim() === "") return;
 
-    setTasks([...tasks, { text: task, completed: false }]);
+    setTasks([
+      ...tasks,
+      {
+        text: task,
+        completed: false,
+      },
+    ]);
+
     setTask("");
   }
 
+  // Complete Task
   function toggleTask(index: number) {
     const updatedTasks = [...tasks];
-    updatedTasks[index].completed = !updatedTasks[index].completed;
+
+    updatedTasks[index].completed =
+      !updatedTasks[index].completed;
+
+    setTasks(updatedTasks);
+  }
+
+  // Delete Task
+  function deleteTask(index: number) {
+    const updatedTasks = tasks.filter(
+      (_, taskIndex) => taskIndex !== index
+    );
+
     setTasks(updatedTasks);
   }
 
@@ -62,7 +84,9 @@ export default function Home() {
               {item.text}
             </span>
 
-            <button>Delete</button>
+            <button onClick={() => deleteTask(index)}>
+              Delete
+            </button>
           </li>
         ))}
       </ul>
