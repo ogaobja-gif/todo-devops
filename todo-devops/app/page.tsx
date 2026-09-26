@@ -52,7 +52,7 @@ export default function Home() {
 
   return (
     <main>
-      <h1>TODO APPLICATION</h1>
+      <h1>TODO APPLICATION — Version 1.1 Development</h1>
 
       <div>
         <input
